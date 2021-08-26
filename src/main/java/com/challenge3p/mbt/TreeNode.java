@@ -14,12 +14,18 @@ public class TreeNode {
     TreeNode(int x) { val = x; }
 
 
-
+    /** Print the TreeNode Structure
+     * @return  String representation of the tree node
+     */
     public String print(){
         List lista = getList();
         return  lista.toString();
     }
 
+
+    /**Build an ArrayList to be printed
+     * @return  the ArrayList built from the tree node
+     */
     private List getList() {
         List lista = new ArrayList();
         int h = height(this);
