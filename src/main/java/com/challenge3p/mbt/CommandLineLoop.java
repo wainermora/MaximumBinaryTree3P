@@ -3,11 +3,17 @@ package com.challenge3p.mbt;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @SuppressWarnings("WeakerAccess")
 public class CommandLineLoop {
+    private static final String REGEX_COMMA_SEPARATED_NUMBERS = "((\\d\\,(?=\\d))|\\d)+";
+    private static final String COMMA = ",";
     private BufferedReader br;
     private MaximumBinaryTreeBuilder builder;
+    Pattern pattern = Pattern.compile(REGEX_COMMA_SEPARATED_NUMBERS);
+
 
     public CommandLineLoop() {
         this.br = new BufferedReader(new InputStreamReader(System.in));
@@ -40,12 +46,12 @@ public class CommandLineLoop {
     }
 
     private boolean validateInput(final String input){
-        return input.matches( "((\\d\\,(?=\\d))|\\d)+");
-
+        Matcher matcher = pattern.matcher(input);
+        return matcher.find();
     }
 
     private  int[] toArray(final String input){
-        return Arrays.stream(input.split(",")).mapToInt(Integer::parseInt).toArray();
+        return Arrays.stream(input.split(COMMA)).mapToInt(Integer::parseInt).toArray();
     }
 
 
